@@ -1,6 +1,7 @@
 <template>
 	<div class="header">
-		I am header
+		I am header 
+		<p>{{count}}</p>
 	</div>
 </template>
 

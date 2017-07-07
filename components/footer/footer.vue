@@ -1,6 +1,7 @@
 <template>
 	<div class="footer">
 		I am footer
+		<p>{{count}}</p>
 	</div>
 </template>
 
@@ -24,7 +25,9 @@
             }
 		},
 		computed: { //计算属性，当一个数据 需要计算 并实时根据data中数据不断变化时  使用。 
-			
+			count () {
+				return this.$store.state.count
+			}
 		},
 		filters: {
 			
