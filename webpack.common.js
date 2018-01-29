@@ -97,14 +97,28 @@ let config = {
 }
 
 //业务入口文件所在的目录
-let entryDir = path.join(__dirname, 'pages/');
 let chunknames = [];
-let entries = glob.sync(entryDir + '*').map(function (entry) {
-    chunknames.push(path.basename(entry));
-    return {
-        name: path.basename(entry),
-        path: entry
+let entries = [];
+let entryDir = path.join(__dirname, 'pages/');
+glob.sync(entryDir + '*').forEach(function (entry) {
+    let basename = path.basename(entry);
+    if(basename !== 'admin'){
+        chunknames.push(basename);
+        entries.push({
+            name: basename,
+            path: entry
+        });
     }
+});
+
+let adminEntryDir = path.join(__dirname, 'pages/admin/');
+glob.sync(adminEntryDir + '*').forEach(function (entry) {
+    let basename = path.basename(entry);
+    chunknames.push('admin/' + basename);
+    entries.push({
+        name: 'admin/' + basename,
+        path: entry
+    });
 });
 
 entries.forEach(function (entry) {
